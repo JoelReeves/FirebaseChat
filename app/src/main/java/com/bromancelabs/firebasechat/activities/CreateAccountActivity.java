@@ -22,11 +22,11 @@ import timber.log.Timber;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    @Bind(R.id.txt_login_username) EditText usernameEditText;
+    @Bind(R.id.txt_login_email) EditText emailEditText;
     @Bind(R.id.txt_login_password) EditText passwordEditText;
     @Bind(R.id.txt_confirm_password) EditText confirmPasswordEditText;
 
-    private String username;
+    private String email;
     private String password;
     private String confirmPassword;
 
@@ -42,7 +42,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_sign_up)
     public void signUpClick() {
-        username = usernameEditText.getText().toString();
+        email = emailEditText.getText().toString();
         password = passwordEditText.getText().toString();
         confirmPassword = confirmPasswordEditText.getText().toString();
 
@@ -50,7 +50,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             progressDialog = new ProgressDialog(this);
             progressDialog.show();
 
-            BaseApplication.getFirebase().createUser(username, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
+            BaseApplication.getFirebase().createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> stringObjectMap) {
                     cancelProgressDialog();
@@ -73,7 +73,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private boolean isAccountCriteriaSatisfied() {
         int errorCount = 0;
 
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
             errorCount++;
             showSnackbar(R.string.create_account_missing_fields);
         }
@@ -96,6 +96,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     private void showSnackbar(int message) {
-        Snackbar.make(usernameEditText, message, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(emailEditText, message, Snackbar.LENGTH_SHORT).show();
     }
 }

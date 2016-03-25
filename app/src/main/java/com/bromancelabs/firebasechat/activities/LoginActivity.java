@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
 
 
 public class LoginActivity extends AppCompatActivity {
-    @Bind(R.id.txt_login_username) EditText usernameEditText;
+    @Bind(R.id.txt_login_email) EditText emailEditText;
     @Bind(R.id.txt_login_password) EditText passwordEditText;
 
     @Override

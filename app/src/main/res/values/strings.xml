@@ -21,7 +21,7 @@
     <string name="create_account_password_mismatch">Both passwords must match</string>
 
     <!-- Login Layout -->
-    <string name="hint_username">User name</string>
+    <string name="hint_email">Email address</string>
     <string name="hint_password">Password</string>
 
 </resources>
