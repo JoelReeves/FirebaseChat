@@ -1,15 +1,14 @@
 package com.bromancelabs.firebasechat.activities;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.bromancelabs.firebasechat.BaseApplication;
 import com.bromancelabs.firebasechat.R;
+import com.bromancelabs.firebasechat.utils.SnackBarUtils;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
@@ -55,16 +54,15 @@ public class CreateAccountActivity extends AppCompatActivity {
                 public void onSuccess(Map<String, Object> stringObjectMap) {
                     cancelProgressDialog();
                     Timber.d("Successfully created user account with uid: %s", stringObjectMap.get("uid"));
-                    showSnackbar(R.string.create_account_successful);
                     finish();
-                    startActivity(new Intent(CreateAccountActivity.this, LoginActivity.class));
+                    startActivity(LoginActivity.newIntent(CreateAccountActivity.this, email, password));
                 }
 
                 @Override
                 public void onError(FirebaseError firebaseError) {
                     cancelProgressDialog();
                     Timber.e(firebaseError.getMessage());
-                    showSnackbar(R.string.create_account_error);
+                    SnackBarUtils.showSnackbar(emailEditText, R.string.create_account_error);
                 }
             });
         }
@@ -75,13 +73,13 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
             errorCount++;
-            showSnackbar(R.string.create_account_missing_fields);
+            SnackBarUtils.showSnackbar(emailEditText, R.string.create_account_missing_fields);
         }
 
 
         if (!password.equals(confirmPassword)) {
             errorCount++;
-            showSnackbar(R.string.create_account_password_mismatch);
+            SnackBarUtils.showSnackbar(emailEditText, R.string.create_account_password_mismatch);
         }
 
         Timber.d("Error count: %d", errorCount);
@@ -93,9 +91,5 @@ public class CreateAccountActivity extends AppCompatActivity {
         if (progressDialog != null) {
             progressDialog.cancel();
         }
-    }
-
-    private void showSnackbar(int message) {
-        Snackbar.make(emailEditText, message, Snackbar.LENGTH_SHORT).show();
     }
 }
