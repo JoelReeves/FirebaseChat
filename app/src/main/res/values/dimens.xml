@@ -2,4 +2,14 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- CreateAccountActivity -->
+    <dimen name="confirm_password_marginTop">10dp</dimen>
+    <dimen name="btn_sign_up_marginTop">20dp</dimen>
+
+    <!-- LoginActivity -->
+    <dimen name="btn_login_marginTop">20dp</dimen>
+
+    <!-- Login Layout -->
+    <dimen name="login_password_marginTop">10dp</dimen>
 </resources>

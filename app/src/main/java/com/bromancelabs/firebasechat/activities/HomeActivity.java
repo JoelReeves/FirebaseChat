@@ -20,12 +20,12 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.btn_login)
+    @OnClick(R.id.btn_home_login)
     public void loginButtonClick() {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
-    @OnClick(R.id.btn_create_account)
+    @OnClick(R.id.btn_home_create_account)
     public void createAccountClick() {
         startActivity(new Intent(this, CreateAccountActivity.class));
     }
