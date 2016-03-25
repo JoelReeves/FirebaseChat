@@ -55,6 +55,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick(R.id.btn_reset_password)
+    public void resetPasswordButtonClick() {
+
+    }
+
     @OnClick(R.id.btn_login)
     public void loginButtonClick() {
         String email = emailEditText.getText().toString();

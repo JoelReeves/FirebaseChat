@@ -19,6 +19,9 @@
     <string name="create_account_missing_fields">Please fill out all fields</string>
     <string name="create_account_password_mismatch">Both passwords must match</string>
 
+    <!-- LoginActivity -->
+    <string name="btn_reset_password">Reset Password</string>
+
     <!-- Login Layout -->
     <string name="hint_email">Email address</string>
     <string name="hint_password">Password</string>
