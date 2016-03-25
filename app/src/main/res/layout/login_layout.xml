@@ -5,11 +5,10 @@
               android:layout_height="wrap_content">
 
     <EditText
-        android:id="@+id/txt_login_email"
+        android:id="@+id/txt_login_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_email_address"
-        android:inputType="textEmailAddress"/>
+        android:hint="@string/hint_username"/>
 
     <EditText
         android:id="@+id/txt_login_password"

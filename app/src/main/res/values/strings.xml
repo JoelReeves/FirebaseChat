@@ -17,7 +17,7 @@
     <string name="btn_sign_up">Sign Up</string>
 
     <!-- Login Layout -->
-    <string name="hint_email_address">Email Address</string>
+    <string name="hint_username">User name</string>
     <string name="hint_password">Password</string>
 
 </resources>

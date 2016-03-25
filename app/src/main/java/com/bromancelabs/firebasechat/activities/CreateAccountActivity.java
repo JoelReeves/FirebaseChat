@@ -22,8 +22,9 @@ import timber.log.Timber;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    @Bind(R.id.txt_login_email) EditText emailEditText;
+    @Bind(R.id.txt_login_username) EditText usernameEditText;
     @Bind(R.id.txt_login_password) EditText passwordEditText;
+    @Bind(R.id.txt_confirm_password) EditText confirmPasswordEditText;
 
     private ProgressDialog progressDialog;
 
@@ -37,19 +38,19 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_sign_up)
     public void signUpClick() {
-        String email = emailEditText.getText().toString();
+        String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             progressDialog = new ProgressDialog(this);
             progressDialog.show();
 
-            BaseApplication.getFirebase().createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
+            BaseApplication.getFirebase().createUser(username, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> stringObjectMap) {
                     cancelProgressDialog();
                     Timber.d("Successfully created user account with uid: %s", stringObjectMap.get("uid"));
-                    Snackbar.make(emailEditText, "Account successfully created", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(usernameEditText, "Account successfully created", Snackbar.LENGTH_SHORT).show();
                     finish();
                     startActivity(new Intent(CreateAccountActivity.this, LoginActivity.class));
                 }
@@ -58,11 +59,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                 public void onError(FirebaseError firebaseError) {
                     cancelProgressDialog();
                     Timber.e(firebaseError.getMessage());
-                    Snackbar.make(emailEditText, "Error creating account", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(usernameEditText, "Error creating account", Snackbar.LENGTH_LONG).show();
                 }
             });
         } else {
-            Snackbar.make(emailEditText, "Please fill out both fields", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(usernameEditText, "Please fill out both fields", Snackbar.LENGTH_SHORT).show();
         }
     }
 
