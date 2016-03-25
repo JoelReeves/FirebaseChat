@@ -5,4 +5,8 @@
     <string name="txt_name">Name</string>
     <string name="txt_message">Message</string>
     <string name="btn_send">Send</string>
+
+    <!-- HomeActivity -->
+    <string name="btn_login">Login</string>
+    <string name="btn_create_account">Create Account</string>
 </resources>
