@@ -22,6 +22,7 @@
         <activity android:name=".activities.ChatActivity"/>
         <activity android:name=".activities.CreateAccountActivity"/>
         <activity android:name=".activities.LoginActivity"/>
+        <activity android:name=".activities.ResetPasswordActivity"/>
     </application>
 
 </manifest>

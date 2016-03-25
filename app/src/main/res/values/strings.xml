@@ -22,6 +22,11 @@
     <!-- LoginActivity -->
     <string name="btn_reset_password">Reset Password</string>
 
+    <!-- ResetPasswordActivity -->
+    <string name="btn_reset_confirm">Confirm</string>
+    <string name="reset_password_missing_email">Please enter a valid email address</string>
+    <string name="reset_email_success">Password reset email sent</string>
+
     <!-- Login Layout -->
     <string name="hint_email">Email address</string>
     <string name="hint_password">Password</string>

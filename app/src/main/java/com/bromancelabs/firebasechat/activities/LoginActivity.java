@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_reset_password)
     public void resetPasswordButtonClick() {
-
+        startActivity(new Intent(this, ResetPasswordActivity.class));
     }
 
     @OnClick(R.id.btn_login)
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onAuthenticated(AuthData authData) {
                 cancelProgressDialog();
-                Timber.d("User ID: %s , Provider: %s", authData.getUid(), authData.getProvider());
+                Timber.d("User string: %s", authData.toString());
                 finish();
                 startActivity(new Intent(LoginActivity.this, ChatActivity.class));
             }
