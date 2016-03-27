@@ -1,6 +1,5 @@
 package com.bromancelabs.firebasechat.activities;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.widget.EditText;
 
 import com.bromancelabs.firebasechat.BaseApplication;
 import com.bromancelabs.firebasechat.R;
+import com.bromancelabs.firebasechat.utils.DialogUtils;
 import com.bromancelabs.firebasechat.utils.SnackBarUtils;
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
@@ -26,8 +26,6 @@ public class LoginActivity extends BaseActivity {
 
     @Bind(R.id.txt_login_email) EditText emailEditText;
     @Bind(R.id.txt_login_password) EditText passwordEditText;
-
-    private ProgressDialog progressDialog;
 
     public static Intent newIntent(Context context, String email, String password) {
         Intent intent = new Intent(context, ChatActivity.class);
@@ -70,13 +68,12 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void login(String email, String password) {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.show();
+        progressDialog = DialogUtils.showProgressDialog(this);
 
         BaseApplication.getFirebase().authWithPassword(email, password, new Firebase.AuthResultHandler() {
             @Override
             public void onAuthenticated(AuthData authData) {
-                cancelProgressDialog();
+                DialogUtils.cancelProgressDialog(progressDialog);
                 Timber.d("User string: %s", authData.toString());
                 finish();
                 startActivity(new Intent(LoginActivity.this, ChatActivity.class));
@@ -84,16 +81,10 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onAuthenticationError(FirebaseError firebaseError) {
-                cancelProgressDialog();
+                DialogUtils.cancelProgressDialog(progressDialog);
                 Timber.e(firebaseError.getMessage());
                 SnackBarUtils.showSnackbar(emailEditText, firebaseError.getMessage());
             }
         });
-    }
-
-    private void cancelProgressDialog() {
-        if (progressDialog != null) {
-            progressDialog.cancel();
-        }
     }
 }

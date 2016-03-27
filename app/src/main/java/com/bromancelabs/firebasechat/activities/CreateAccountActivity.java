@@ -1,11 +1,12 @@
 package com.bromancelabs.firebasechat.activities;
 
-import android.app.ProgressDialog;
+import android.app.Dialog;
 import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.bromancelabs.firebasechat.BaseApplication;
 import com.bromancelabs.firebasechat.R;
+import com.bromancelabs.firebasechat.utils.DialogUtils;
 import com.bromancelabs.firebasechat.utils.SnackBarUtils;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -26,7 +27,7 @@ public class CreateAccountActivity extends BaseActivity {
     private String password;
     private String confirmPassword;
 
-    private ProgressDialog progressDialog;
+    private Dialog progressDialog;
 
     @Override
     protected int setLayoutResId() {
@@ -40,13 +41,12 @@ public class CreateAccountActivity extends BaseActivity {
         confirmPassword = confirmPasswordEditText.getText().toString();
 
         if (isAccountCriteriaSatisfied()) {
-            progressDialog = new ProgressDialog(this);
-            progressDialog.show();
+            progressDialog = DialogUtils.showProgressDialog(this);
 
             BaseApplication.getFirebase().createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> stringObjectMap) {
-                    cancelProgressDialog();
+                    DialogUtils.cancelProgressDialog(progressDialog);
                     Timber.d("Successfully created user account with uid: %s", stringObjectMap.get("uid"));
                     finish();
                     startActivity(LoginActivity.newIntent(CreateAccountActivity.this, email, password));
@@ -54,7 +54,7 @@ public class CreateAccountActivity extends BaseActivity {
 
                 @Override
                 public void onError(FirebaseError firebaseError) {
-                    cancelProgressDialog();
+                    DialogUtils.cancelProgressDialog(progressDialog);
                     Timber.e(firebaseError.getMessage());
                     SnackBarUtils.showSnackbar(emailEditText, R.string.create_account_error);
                 }
@@ -79,11 +79,5 @@ public class CreateAccountActivity extends BaseActivity {
         Timber.d("Error count: %d", errorCount);
 
         return errorCount == 0;
-    }
-
-    private void cancelProgressDialog() {
-        if (progressDialog != null) {
-            progressDialog.cancel();
-        }
     }
 }
