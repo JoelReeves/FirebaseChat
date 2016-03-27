@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
 
-import com.bromancelabs.firebasechat.BaseApplication;
 import com.bromancelabs.firebasechat.R;
 import com.bromancelabs.firebasechat.utils.DialogUtils;
 import com.bromancelabs.firebasechat.utils.SnackBarUtils;
@@ -70,7 +69,7 @@ public class LoginActivity extends BaseActivity {
     private void login(String email, String password) {
         progressDialog = DialogUtils.showProgressDialog(this);
 
-        BaseApplication.getFirebase().authWithPassword(email, password, new Firebase.AuthResultHandler() {
+        firebaseRef.authWithPassword(email, password, new Firebase.AuthResultHandler() {
             @Override
             public void onAuthenticated(AuthData authData) {
                 DialogUtils.cancelProgressDialog(progressDialog);

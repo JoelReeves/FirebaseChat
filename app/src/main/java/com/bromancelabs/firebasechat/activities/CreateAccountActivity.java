@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.text.TextUtils;
 import android.widget.EditText;
 
-import com.bromancelabs.firebasechat.BaseApplication;
 import com.bromancelabs.firebasechat.R;
 import com.bromancelabs.firebasechat.utils.DialogUtils;
 import com.bromancelabs.firebasechat.utils.SnackBarUtils;
@@ -43,7 +42,7 @@ public class CreateAccountActivity extends BaseActivity {
         if (isAccountCriteriaSatisfied()) {
             progressDialog = DialogUtils.showProgressDialog(this);
 
-            BaseApplication.getFirebase().createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
+            firebaseRef.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> stringObjectMap) {
                     DialogUtils.cancelProgressDialog(progressDialog);

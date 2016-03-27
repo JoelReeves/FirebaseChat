@@ -3,7 +3,6 @@ package com.bromancelabs.firebasechat.activities;
 import android.text.TextUtils;
 import android.widget.EditText;
 
-import com.bromancelabs.firebasechat.BaseApplication;
 import com.bromancelabs.firebasechat.R;
 import com.bromancelabs.firebasechat.utils.SnackBarUtils;
 import com.firebase.client.Firebase;
@@ -26,7 +25,7 @@ public class ResetPasswordActivity extends BaseActivity {
         final String email = emailEditText.getText().toString();
 
         if (!TextUtils.isEmpty(email)) {
-            BaseApplication.getFirebase().resetPassword(email, new Firebase.ResultHandler() {
+            firebaseRef.resetPassword(email, new Firebase.ResultHandler() {
                 @Override
                 public void onSuccess() {
                     emailEditText.setText("");

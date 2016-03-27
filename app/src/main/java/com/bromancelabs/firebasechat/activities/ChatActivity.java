@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.widget.EditText;
 
-import com.bromancelabs.firebasechat.BaseApplication;
 import com.bromancelabs.firebasechat.R;
 import com.bromancelabs.firebasechat.models.ChatMessage;
 import com.bromancelabs.firebasechat.views.ChatMessageViewHolder;
@@ -43,7 +42,7 @@ public class ChatActivity extends BaseActivity {
         super.onResume();
 
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ChatMessage, ChatMessageViewHolder>
-                (ChatMessage.class, R.layout.recyclerview_row_item, ChatMessageViewHolder.class, BaseApplication.getFirebase()) {
+                (ChatMessage.class, R.layout.recyclerview_row_item, ChatMessageViewHolder.class, firebaseRef) {
             @Override
             protected void populateViewHolder(ChatMessageViewHolder chatMessageViewHolder, ChatMessage message, int i) {
                 chatMessageViewHolder.bindChatMessage(message);
@@ -70,7 +69,7 @@ public class ChatActivity extends BaseActivity {
 
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(message)) {
             ChatMessage msg = new ChatMessage(name, message);
-            BaseApplication.getFirebase().push().setValue(msg);
+            firebaseRef.push().setValue(msg);
             chatNameEditText.setText("");
             chatMessageEditText.setText("");
         } else {
