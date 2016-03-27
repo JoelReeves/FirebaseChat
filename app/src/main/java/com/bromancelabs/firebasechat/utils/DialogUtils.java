@@ -20,7 +20,7 @@ public class DialogUtils {
 
     public static void cancelProgressDialog(Dialog dialog) {
         if (dialog != null) {
-            dialog.cancel();
+            dialog.dismiss();
         }
     }
 }
