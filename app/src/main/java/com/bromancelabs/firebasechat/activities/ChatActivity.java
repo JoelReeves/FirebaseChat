@@ -2,7 +2,6 @@ package com.bromancelabs.firebasechat.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -16,10 +15,9 @@ import com.bromancelabs.firebasechat.views.SimpleDividerItemDecoration;
 import com.firebase.ui.FirebaseRecyclerAdapter;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends BaseActivity {
 
     @Bind(R.id.txt_name) EditText chatNameEditText;
     @Bind(R.id.txt_message) EditText chatMessageEditText;
@@ -30,12 +28,14 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
-
-        ButterKnife.bind(this);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    protected int setLayoutResId() {
+        return R.layout.activity_chat;
     }
 
     @Override

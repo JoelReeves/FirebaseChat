@@ -1,8 +1,6 @@
 package com.bromancelabs.firebasechat.activities;
 
 import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.EditText;
 
@@ -15,11 +13,10 @@ import com.firebase.client.FirebaseError;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
 
-public class CreateAccountActivity extends AppCompatActivity {
+public class CreateAccountActivity extends BaseActivity {
 
     @Bind(R.id.txt_login_email) EditText emailEditText;
     @Bind(R.id.txt_login_password) EditText passwordEditText;
@@ -32,11 +29,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account);
-
-        ButterKnife.bind(this);
+    protected int setLayoutResId() {
+        return R.layout.activity_create_account;
     }
 
     @OnClick(R.id.btn_sign_up)

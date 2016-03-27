@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.EditText;
 
@@ -16,12 +15,11 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private static final String EXTRA_EMAIL = "extra_email";
     private static final String EXTRA_PASSWORD = "extra_password";
@@ -39,11 +37,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
+    protected int setLayoutResId() {
+        return R.layout.activity_login;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        ButterKnife.bind(this);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
