@@ -45,10 +45,7 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-
-        if (extras != null) {
+        if (getIntent() != null && getIntent().getExtras() != null && !getIntent().getExtras().isEmpty()) {
             String accountEmail = getIntent().getStringExtra(EXTRA_EMAIL);
             String accountPassword = getIntent().getStringExtra(EXTRA_PASSWORD);
             login(accountEmail, accountPassword);
